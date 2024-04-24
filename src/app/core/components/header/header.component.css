@@ -1,0 +1,47 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+.header{
+    background-color: #FFBF71!important;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.searchAndButtonsContainer{
+    align-items: center !important;
+}
+
+.container{
+    margin-right: 5px !important;
+    margin-left: 5px !important;
+}
+
+@media (min-width: 1200px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1280px;
+    }
+}
+
+/* Estilos para pantallas grandes o más grandes */
+@media (min-width: 992px) {
+    .searchAndButtonsContainer{
+        display: flex !important;
+    }
+}
+
+.searchForm{
+    width: 60% !important;
+}
+
+.btn:hover{
+    background-color: #f3a03b !important;
+}
+
+.button-header{
+    background-color: #FFE4CF;
+    margin-inline: 10px;
+    padding-block: 0;
+    width: 6.5em;
+    height: 2.5em;
+    line-height: 1;
+    font-size: 14px;
+}

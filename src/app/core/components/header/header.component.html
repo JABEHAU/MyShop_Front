@@ -1,0 +1,43 @@
+<header id="header" class="header header-transparent navbar-fixed">
+    <div class="container">
+        <div class="Row d-flex">
+            <!--Logo-->
+            <div class="col-lg-1 col-3 align-self-center">
+                <a routerLink="home" class="navbar-brand logo">
+                    <img src="../../../../assets/icons/logo.png" alt="My Shop" width="60px">
+                </a>
+            </div>
+            <!--Barra de busqueda y botones-->
+            <div class="col-lg-9 searchAndButtonsContainer justify-content-start d-none d-sm-block">
+                <form class="d-flex searchForm" role="search">
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Buscar en My Shop" aria-label="Search" style="border-color: rgb(87, 85, 85);">
+                        <button class="btn btn-outline-success" type="submit" style="color: rgb(87, 85, 85); border-color: rgb(87, 85, 85);">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="buttons d-flex px-3">
+                    <button type="button" class="btn button-header" routerLink="home">Inicio</button>
+                    <button type="button" class="btn button-header" routerLink="offers">Ofertas</button>
+                    <button type="button" class="btn button-header" routerLink="best-seller">Lo más vendido</button>
+                </div>
+            </div>
+            <!--Icono de carrito y perfil-->
+            <div class="col-lg-2 col-9 d-lg-block text-lg-right">
+                <ul class="navbar-nav main-menu d-flex flex-row justify-content-end">
+                    <li class="menu-item menu-item-type-post_type nav-item" style="margin-inline: 2em !important;">
+                        <a routerLink="cart" class="navbar" title="Ir a mi carrito">
+                            <i class="bi-cart4 nav-link" style="font-size: 1.8rem; color: black;"></i>
+                        </a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type nav-item">
+                        <a [routerLink]="isUserLogin? 'userProfile':'Login'" class="navbar" [title]="isUserLogin ? 'Ir a mi cuenta': 'Iniciar sesión'">
+                            <i class="bi-person-circle nav-link" style="font-size: 1.8rem; color: black;"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
