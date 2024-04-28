@@ -1,0 +1,21 @@
+<div class="container d-flex flex-column align-items-center justify-content-center h-100 p-3">
+    <img src="../../../assets/icons/logo.png" alt="MyShop logo" width="8%">
+    
+    <div class="p-4" style="width: 50%; border: 1px solid rgba(0, 0, 0, 0.21) !important;">
+        <div class="w-100 justify-content-center d-flex">
+            <p>Iniciar Sesion</p>
+        </div>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <div class="mb-3">
+                <label for="inputEmail" class="form-label">Dirección Email</label>
+                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+                <!--div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div-->
+            </div>
+            <div class="mb-3">
+                <label for="inputPassword" class="form-label">Constraseña</label>
+                <input type="password" class="form-control" id="inputPassword">
+            </div>
+            <button type="button" class="btn btn-primary">Confirmar</button>
+        </form>
+    </div>
+</div>

@@ -32,7 +32,7 @@
     width: 60% !important;
 }
 
-.btn:hover{
+.input-group .btn:hover{
     background-color: #f3a03b !important;
 }
 
@@ -44,4 +44,14 @@
     height: 2.5em;
     line-height: 1;
     font-size: 14px;
+}
+
+.navbar-nav .dropdown-menu {
+    position: absolute !important;
+}
+
+.btn-outline-success:active,
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active
+{
+    border-color: transparent !important;
 }

@@ -18,9 +18,18 @@
                     </div>
                 </form>
                 <div class="buttons d-flex px-3">
-                    <button type="button" class="btn button-header" routerLink="home">Inicio</button>
-                    <button type="button" class="btn button-header" routerLink="offers">Ofertas</button>
-                    <button type="button" class="btn button-header" routerLink="best-seller">Lo más vendido</button>
+                    <nav class="navbar">
+                        <ul class="navbar-nav main-menu d-flex flex-row">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">Categorías</button>
+                                <ul class="dropdown-menu">
+                                    <li *ngFor="let category of categories"><a class="dropdown-item" [queryParams]="{id: category.categoriaId}" routerLink="c" >{{category.categoria}}</a></li>
+                                </ul>
+                            </div>
+                            <!--li><a  class="nav-link mx-3" routerLink="c" [queryParams]="{ category: '123' }">Carrito</a></li-->
+                            <li><a  class="nav-link mx-3" routerLink="best-seller">Lo mas vendido</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <!--Icono de carrito y perfil-->
@@ -32,7 +41,7 @@
                         </a>
                     </li>
                     <li class="menu-item menu-item-type-post_type nav-item">
-                        <a [routerLink]="isUserLogin? 'userProfile':'Login'" class="navbar" [title]="isUserLogin ? 'Ir a mi cuenta': 'Iniciar sesión'">
+                        <a [routerLink]="isUserLogin? 'userProfile':'login'" class="navbar" [title]="isUserLogin ? 'Ir a mi cuenta': 'Iniciar sesión'">
                             <i class="bi-person-circle nav-link" style="font-size: 1.8rem; color: black;"></i>
                         </a>
                     </li>
