@@ -1,21 +1,77 @@
 <div class="container d-flex flex-column align-items-center justify-content-center h-100 p-3">
     <img src="../../../assets/icons/logo.png" alt="MyShop logo" width="8%">
     
-    <div class="p-4" style="width: 50%; border: 1px solid rgba(0, 0, 0, 0.21) !important;">
-        <div class="w-100 justify-content-center d-flex">
-            <p>Iniciar Sesion</p>
+    <div class="p-4 form-container">
+        <div class="w-100 mb-3 justify-content-center d-flex">
+            <b>Iniciar Sesión</b>
         </div>
-        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+        <div *ngIf="incorrectCredential" class="alert alert-danger alert-dismissible fade show" role="alert">
+            El correo o la contraseña son incorrectos. Por favor verifica tus credenciales.
+            <button type="button" class="btn-close" (click)="dismissAlert(1)" aria-label="Close"></button>
+        </div>
+
+        <form (ngSubmit)="submit(form)" #form="ngForm" class="justify-content-center d-flex flex-column">  
             <div class="mb-3">
                 <label for="inputEmail" class="form-label">Dirección Email</label>
-                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
-                <!--div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div-->
+                <input type="email" placeholder="example@correo.com" class="form-control" id="inputEmail" [(ngModel)]="email" name="email" aria-describedby="emailHelp" required>
+                <div *ngIf="emailIsInvalid" class="text-danger">
+                    Correo inválido
+                </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-2">
                 <label for="inputPassword" class="form-label">Constraseña</label>
-                <input type="password" class="form-control" id="inputPassword">
+                <input type="password" class="form-control" id="inputPassword" [(ngModel)]="password" name="password" required>
+                <div *ngIf="passwordIsInvalid" class="text-danger">
+                    Ingrese su contraseña
+                </div>
             </div>
-            <button type="button" class="btn btn-primary">Confirmar</button>
+            <div class="w-100 mb-3">
+                <button type=button class="link-button" data-bs-toggle="modal" data-bs-target="#exampleModal">Recuperar contraseña</button>
+            </div>
+
+            <div class="justify-content-center d-flex">
+                <button [disabled]="isLoadingButton" type="submit" class="btn btn-confirmar">
+                    <a *ngIf="!isLoadingButton">Confirmar</a>
+                    <span *ngIf="isLoadingButton" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </button>
+                
+            </div>
         </form>
+    </div>
+
+    <div (click)="createAccount()" class="mt-3">
+        <a class="btn">Crear cuenta en My Shop</a>
+    </div>
+</div>
+
+
+<!-- PopUP to send password by email -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Recuperar Contraseña</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div *ngIf="emailSendSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                Su contraseña se ha enviado, por favor revise su bandeja de entrada
+                <button type="button" class="btn-close" (click)="dismissAlert(2)" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="sendPassword(formPop)" #formPop="ngForm">
+                <div class="modal-body">
+                    <p>La contraseña se enviará al correo con el que fue registrado</p>
+                    <label for="inputEmail" class="form-label">Dirección Email</label>
+                    <input type="email" class="form-control" placeholder="example@correo.com" id="inputEmail" [(ngModel)]="emailToSendPassword" name="email" aria-describedby="emailHelp" required>
+                    <div *ngIf="emailToSendPasswordIsInvalid" class="text-danger">
+                        Correo inválido
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <!--button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button-->
+                <button type="submit" class="btn btn-primary">Envíar</button>
+                </div>
+            </form>
+      </div>
     </div>
 </div>
