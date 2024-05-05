@@ -20,8 +20,12 @@ steps:
     npm install
     ng build Front
   displayName: 'npm install and build'
+
+- script: env
+  displayName: 'List environment variables'
+
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/dist/Front'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/dist/Front'
     ArtifactName: 'drop'
     publishLocation: 'Container'
