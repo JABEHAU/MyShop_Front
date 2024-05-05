@@ -1,0 +1,86 @@
+<div class="container d-flex flex-column align-items-center justify-content-center h-100 my-3">
+    <img src="../../../assets/icons/logo.png" alt="MyShop logo" width="8%">
+    <div class="p-4 form-container">
+        <div class="w-100 mb-3 justify-content-center d-flex">
+            <b>Crear cuenta</b>
+        </div>
+
+        <div *ngIf="emailExists" class="alert alert-danger alert-dismissible fade show" role="alert">
+            Ya existe una cuenta registrada con ese correo.
+            <button type="button" class="btn-close" (click)="dismissAlert()" aria-label="Close"></button>
+        </div>
+
+        <div *ngIf="userRegisterSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+            Te has registrado con éxito.
+            <button type="button" class="btn-close" (click)="dismissAlert()" aria-label="Close"></button>
+        </div>
+
+        <form (ngSubmit)="submit(form)" novalidate="false" #form="ngForm" class="d-flex flex-column">
+            <div class="form-sign-up">
+                <div class="justify-content-start d-flex flex-column p-3 form-column">
+                    <div class="mb-2">
+                        <label for="inputEmail" class="form-label">Dirección Email</label>
+                        <input type="email" placeholder="example@correo.com" [(ngModel)]="email" class="form-control"
+                            id="inputEmail" name="email" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="inputName" class="form-label">Nombre</label>
+                        <input type="text" [(ngModel)]="name" class="form-control" id="inputName" name="name" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="inputPhone" class="form-label">Telefono</label>
+                        <input type="tel" [(ngModel)]="phone" class="form-control" id="inputPhone" name="phone"
+                            required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="inputCountry" class="form-label">País</label>
+                        <input type="text" [(ngModel)]="country" class="form-control" id="inputCountry" name="country"
+                            required>
+                    </div>
+                </div>
+
+                <div class="justify-content-start d-flex flex-column form-column p-3">
+                    <div class="mb-2">
+                        <label for="inputState" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="inputState" [(ngModel)]="state" name="state"
+                            required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="inputCity" class="form-label">Ciudad</label>
+                        <input type="text" class="form-control" id="inputCity" [(ngModel)]="city" name="city" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="inputPassword" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="inputPassword" [(ngModel)]="password"
+                            name="password" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="inputPasswordR" class="form-label">Confrimar contraseña</label>
+                        <input type="password" class="form-control" [ngClass]="{'testxd': wrongPasswordRepeat}"
+                            id="inputPasswordR" [(ngModel)]="passwordR" name="passwordR" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="justify-content-center d-flex">
+                <button type="submit" class="btn btn-confirmar">
+                    <a *ngIf="!isLoadingButton">Confirmar</a>
+                    <span *ngIf="isLoadingButton" class="spinner-border spinner-border-sm" role="status"
+                        aria-hidden="true"></span>
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+
+    <div class="w-100 my-3 justify-content-center d-flex">
+        <a>¿Ya tienes una cuenta? </a><button type=button class="link-button" (click)="login()">Iniciar sesión</button>
+    </div>
+</div>

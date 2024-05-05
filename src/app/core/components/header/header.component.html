@@ -36,7 +36,7 @@
             <div class="col-lg-2 col-9 d-lg-block text-lg-right">
                 <ul class="navbar-nav main-menu d-flex flex-row justify-content-end">
                     <li class="menu-item menu-item-type-post_type nav-item" style="margin-inline: 2em !important;">
-                        <a routerLink="cart" class="navbar" title="Ir a mi carrito">
+                        <a [routerLink]="isUserLogin? 'cart':'login'" class="navbar" title="Ir a mi carrito">
                             <i class="bi-cart4 nav-link" style="font-size: 1.8rem; color: black;"></i>
                         </a>
                     </li>

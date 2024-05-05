@@ -1,0 +1,64 @@
+.form-container{
+    border: 1px solid rgba(0, 0, 0, 0.21) !important;
+    background-color: #FFF8B5;
+}
+
+.btn-confirmar{
+    background-color: #FFBD72;
+    width: 50%;
+}
+  
+.btn{
+    border: 1px solid rgba(0, 0, 0, 0.21) ;
+}
+.btn:hover {
+    box-shadow: 2px 5px 10px rgba(0,0,0,0.2);
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+input.ng-invalid.ng-touched,
+.testxd{
+    border-color: red !important;
+    background-color: #ffe6e6 !important;
+}
+input.ng-valid.ng-touched {
+    border-color: green;
+    background-color: #e6ffe6;
+}
+
+/*Telefonos*/
+@media (max-width: 600px) {
+    .form-container {
+        width: 80%;
+    }
+    .form-sign-up{
+        display: flex;
+        flex-direction: column;
+    }
+    .form-column{
+        width: 100%;
+    }
+}
+/*Pntallas grandes*/
+@media (min-width: 601px) {
+    .form-container {
+      width: 60%;
+    }
+    .form-sign-up{
+        display: flex;
+        flex-direction: row;
+    }
+    .form-column{
+        width: 50%;
+    }
+}

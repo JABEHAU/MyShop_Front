@@ -4,6 +4,7 @@ import { HomeComponent } from './modules/home/home.component';
 import { ShoppingCartComponent } from './modules/shopping-cart/shopping-cart.component';
 import { CategoriesComponent } from './modules/categories/categories.component';
 import { LoginComponent } from './modules/login/login.component';
+import { SignUpComponent } from './modules/sign-up/sign-up.component';
 
 const routes: Routes = [
   {
@@ -14,11 +15,13 @@ const routes: Routes = [
   },
   {
     path: 'login', component: LoginComponent
+  },{
+    path: 'sign-up', component: SignUpComponent
   },
   {
     path: 'cart', component: ShoppingCartComponent
   },{
-    path: 'c', component: CategoriesComponent
+    path: 'c', component: CategoriesComponent /*Para filtro de categorías */
   },
   {
     path: '**', redirectTo: 'home', pathMatch: 'full'

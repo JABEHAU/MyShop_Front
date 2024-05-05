@@ -1,63 +1,59 @@
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/shared/services/users.service';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  standalone: true,
-  imports: [FormsModule, CommonModule, SharedModule, HttpClientModule]
+  standalone: false
 })
 export class LoginComponent {
 
-  public incorrectCredential: boolean = false;
-  public isLoadingButton: boolean = false;
-  public emailIsInvalid: boolean = false;
-  public passwordIsInvalid: boolean = false;
-  public email: string = '';
-  public password: string = '';
-  public emailToSendPassword: string = '';
-  public emailToSendPasswordIsInvalid: boolean = false;
-  public emailSendSuccess: boolean = false;
+  protected incorrectCredential: boolean = false;
+  protected isLoadingButton: boolean = false;
+  protected emailIsInvalid: boolean = false;
+  protected passwordIsInvalid: boolean = false;
+  protected email: string = '';
+  protected password: string = '';
+
+  protected emailToSendPassword: string = '';
+  protected emailToSendPasswordIsInvalid: boolean = false;
+  protected isLoadingButtonSendPassword: boolean = false;
+  protected emailSendSuccess: boolean = false;
+
   constructor(private router: Router,
-    private usersSerivce: UsersService
+    private usersSerivce: UsersService,
+    private localStorageService: LocalStorageService
   ) { }
 
-  public submit(form: any){
-    this.emailIsInvalid = form.controls.email?.invalid;
+  /**click button "confirmar" */
+  protected submit(form: any) {
+    this.emailIsInvalid = form.controls.email?.invalid || !this.isValidEmail(this.email);
     this.passwordIsInvalid = form.controls.password?.invalid;
 
-    if(this.emailIsInvalid || this.passwordIsInvalid)
+    if (this.emailIsInvalid || this.passwordIsInvalid)
       return;
 
-    
     this.verifyAccount(this.email, this.password);
   }
 
-  /**
-   * Method to login
-   * @param email 
-   * @param password 
-   */
-  private async verifyAccount(email: string, password: string){
+  private async verifyAccount(email: string, password: string) {
     //verificar si existe la cuenta
-    this.isLoadingButton=true;
+    this.isLoadingButton = true;
     const user = await this.usersSerivce.getUser(email, password).toPromise();
-    this.isLoadingButton=false;
+    this.isLoadingButton = false;
 
-    if(user==null){
+    if (user == null) {//No existe el usuario
       this.incorrectCredential = true;
       return;
     }
 
     this.incorrectCredential = false;
     //poner el usuario en el localStorage
-    localStorage.setItem('user', JSON.stringify(user));
+    //localStorage.setItem('user', JSON.stringify(user));
+    this.localStorageService.setUser(JSON.stringify(user));
     //redirigír al home
     this.router.navigateByUrl('home');
   }
@@ -66,26 +62,35 @@ export class LoginComponent {
   /**
    * Method to send password by email
    */
-  public sendPassword(formPop: any){
-    this.emailToSendPasswordIsInvalid = formPop.controls.email?.invalid;
-    if(this.emailToSendPasswordIsInvalid)
+  protected async sendPassword(formPop: any) {
+    this.emailToSendPasswordIsInvalid = formPop.controls.email?.invalid || !this.isValidEmail(this.emailToSendPassword);
+
+    if (this.emailToSendPasswordIsInvalid)
       return;
 
-    this.emailSendSuccess=true;
+    this.isLoadingButtonSendPassword = true;
+    await this.usersSerivce.sendPassword(this.emailToSendPassword).toPromise();
+    this.isLoadingButtonSendPassword = false;
+    this.emailSendSuccess = true;
   }
 
   /**
    * Method to redirecto to component sign-up
    */
-  public createAccount(){
+  protected createAccount() {
     this.router.navigateByUrl('sign-up');
   }
 
-  public dismissAlert(numberAlert: number){
-    if(numberAlert==1){
+  protected dismissAlert(alertName: string) {
+    if (alertName == 'loginAlert') {
       this.incorrectCredential = false;
-    }else{
+    } else {
       this.emailSendSuccess = false;
     }
+  }
+
+  private isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   }
 }
