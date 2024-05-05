@@ -18,10 +18,10 @@ steps:
 - script: |
     npm install -g @angular/cli@14.2.12
     npm install
-    ng build WebBase
+    ng build Front
   displayName: 'npm install and build'
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/dist/WebBase'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/dist/Front'
     ArtifactName: 'drop'
     publishLocation: 'Container'
