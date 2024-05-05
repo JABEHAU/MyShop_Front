@@ -21,9 +21,6 @@ steps:
     ng build Front
   displayName: 'npm install and build'
 
-- script: env
-  displayName: 'List environment variables'
-
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/dist/Front'
