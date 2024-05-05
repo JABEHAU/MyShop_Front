@@ -18,7 +18,7 @@ steps:
 - script: |
     npm install -g @angular/cli@14.2.12
     npm install
-    ng build --configuration production
+    ng build WebBase
   displayName: 'npm install and build'
 - task: PublishBuildArtifacts@1
   inputs:
