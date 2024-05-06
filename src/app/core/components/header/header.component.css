@@ -36,6 +36,10 @@
     background-color: #f3a03b !important;
 }
 
+.li-sidebar:hover{
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
 .button-header{
     background-color: #FFE4CF;
     margin-inline: 10px;
@@ -54,4 +58,14 @@
 .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active
 {
     border-color: transparent !important;
+}
+
+
+.button-profile{
+    background-color: transparent!important;
+    border-color: transparent;
+}
+
+.offcanvas{
+    background-color: #FFF8B5!important;
 }

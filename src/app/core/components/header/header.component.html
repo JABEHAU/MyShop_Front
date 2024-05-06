@@ -17,6 +17,7 @@
                         </button>
                     </div>
                 </form>
+
                 <div class="buttons d-flex px-3">
                     <nav class="navbar">
                         <ul class="navbar-nav main-menu d-flex flex-row">
@@ -41,12 +42,57 @@
                         </a>
                     </li>
                     <li class="menu-item menu-item-type-post_type nav-item">
-                        <a [routerLink]="isUserLogin? 'userProfile':'login'" class="navbar" [title]="isUserLogin ? 'Ir a mi cuenta': 'Iniciar sesión'">
+                        <button class="navbar button-profile" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                             <i class="bi-person-circle nav-link" style="font-size: 1.8rem; color: black;"></i>
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </header>
+
+<!--Sidebar-->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header mt-2">
+        <button type="button" class="m-0 btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <h3 class="px-3 offcanvas-title" id="offcanvasRightLabel">Perfil</h3>
+    </div>
+
+    <div class="offcanvas-body p-0">
+        <div class="d-flex flex-row justify-content-center mb-10">
+            <i class="bi-person-circle" style="font-size: 5rem;"></i>
+        </div>
+        
+        <ul class="navbar-nav main-menu d-flex">
+            <li *ngIf="!isUserLogin" class="py-2 menu-item menu-item-type-post_type nav-item li-sidebar btn" routerLink="login" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="bi-person-square px-2"></i>
+                <a>Iniciar sesión</a>
+            </li>
+            <li *ngIf="isUserLogin" class="py-2 menu-item menu-item-type-post_type nav-item li-sidebar btn" routerLink="my-profile" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="bi-person px-2"></i>
+                <a>Mi cuenta</a>
+            </li>
+            <li *ngIf="isUserLogin" class="py-2 menu-item menu-item-type-post_type nav-item li-sidebar btn" routerLink="my-shopping" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="bi-bag-check px-2"></i>
+                <a>Mis compras</a>
+            </li>
+            <li *ngIf="isUserLogin && !isUserSeller" class="py-2 menu-item menu-item-type-post_type nav-item li-sidebar btn" routerLink="become-seller" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="bi-person-video2 px-2"></i>
+                <a>Hacerme vendedor</a>
+            </li>
+            <li *ngIf="isUserLogin && isUserSeller" class="py-2 menu-item menu-item-type-post_type nav-item li-sidebar btn" routerLink="manage-products" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="bi-person-gear px-2"></i>
+                <a>Aministrar productos</a>
+            </li>
+            <li *ngIf="isUserLogin && isUserSeller" class="py-2 menu-item menu-item-type-post_type nav-item li-sidebar btn" routerLink="sales-history" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="bi-box-seam px-2"></i>
+                <a>Historial de ventas</a>
+            </li>
+            <li *ngIf="isUserLogin" class="py-2 menu-item menu-item-type-post_type nav-item li-sidebar btn" (click)="closeSession()" data-bs-dismiss="offcanvas" aria-label="Close">
+                <i class="bi-door-open px-2"></i>
+                <a>Cerrar sesión</a>
+            </li>
+        </ul>
+    </div>
+  </div>

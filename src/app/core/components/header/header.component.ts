@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,20 +14,32 @@ export class HeaderComponent implements OnInit, OnDestroy {
   protected categories: any;
   protected isUserLogin: boolean = false;
   private storageSubscription: Subscription | null = null;
+  protected isUserSeller: boolean = false;
 
   constructor(private localStorageService: LocalStorageService,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private router: Router
   ) { }
 
   async ngOnInit() {
+    this.categories = await this.productService.getCategories().toPromise();
     this.isUserLogin = this.localStorageService.isUserLoggedIn();
     this.storageSubscription = this.localStorageService.getStorageChangeObservable().subscribe(
       (isUserLoggedIn) => {
         this.isUserLogin = isUserLoggedIn;
+        let user: any = this.localStorageService.getUser()
+        if(user){
+          this.isUserSeller = user.esVendedor == 1;
+        }else{
+          this.isUserSeller = false;
+        }
       }
     );
+  }
 
-    this.categories = await this.productService.getCategories().toPromise();
+  closeSession(){
+    this.localStorageService.removeUser();
+    this.router.navigateByUrl('home');
   }
 
   ngOnDestroy(): void {
