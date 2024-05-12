@@ -5,6 +5,8 @@ import { ShoppingCartComponent } from './modules/shopping-cart/shopping-cart.com
 import { CategoriesComponent } from './modules/categories/categories.component';
 import { LoginComponent } from './modules/login/login.component';
 import { SignUpComponent } from './modules/sign-up/sign-up.component';
+import { MyProfileComponent } from './modules/my-profile/my-profile.component';
+import { EditProductComponent } from './modules/edit-product/edit-product.component';
 
 const routes: Routes = [
   {
@@ -17,9 +19,13 @@ const routes: Routes = [
     path: 'login', component: LoginComponent
   },{
     path: 'sign-up', component: SignUpComponent
+  },{
+    path: 'my-profile', component: MyProfileComponent
+  },{
+    path: 'edit-product', component: EditProductComponent
   },
   {
-    path: 'cart', component: ShoppingCartComponent
+    path: 'cart', component: ShoppingCartComponent/*Carrito*/
   },{
     path: 'c', component: CategoriesComponent /*Para filtro de categorías */
   },

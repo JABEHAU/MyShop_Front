@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+.loading-container{
+    width: 10%;
+    margin-top: 5%;
+    justify-content: space-between;
+}

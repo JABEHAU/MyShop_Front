@@ -1,0 +1,10 @@
+<div class="card">
+    <img [src]="product.fotoPrincipal" class="product-img">
+    {{product.nombre}}
+    <b *ngIf="product.esOferta==0">{{product.precio | currency}}</b>
+
+    <div class="beforePrecio" *ngIf="product.esOferta == 1">
+        {{product.precio | currency}}
+    </div>
+    <b *ngIf="product.esOferta==1">{{product.precioOferta | currency}}</b>
+</div>

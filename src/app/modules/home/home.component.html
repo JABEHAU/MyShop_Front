@@ -1,1 +1,65 @@
-<p>BIENVENIDO A MY SHOP</p>
+<div class="home-component container d-flex flex-column align-items-center">
+  <div class="categories-container d-flex">
+    <div class="category-container d-flex flex-column btn" *ngFor="let category of topCategories"
+      (click)="searchCategory(category)">
+      {{category.categoria}}
+      <img class="category-img" [src]="category.imagen" alt="Category Icon">
+      <div class="d-flex">
+        <img class="offer-icon" src="../../../assets/icons/offer.png" alt="offer-icon">
+      </div>
+    </div>
+  </div>
+
+  <div class="product-carousels-container">
+    <div *ngFor="let category of categoriesWithProducts" class="my-5">
+      <div *ngIf="category.productos != null && category.productos.length>7">
+        <div class="carousel-title mb-3">
+          <b>{{category.categoria}}</b>
+        </div>
+        <div class="carousel-body d-flex justify-content-center">
+          <button class="d-none d-md-block slide-button" type="button"
+            [attr.data-bs-target]="'#product-carousel-'+category.categoriaId" data-bs-slide="prev">
+            <i class="bi-arrow-left-circle-fill" style="font-size: 1.8rem; color: grey;"></i>
+          </button>
+          <div [id]="'product-carousel-'+category.categoriaId" class="carousel slide product-carousel"
+            data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row">
+                  <div *ngFor="let product of category.productos.slice(0,4)"
+                    class="col-sm-6 col-md-4 col-lg-3 card-container">
+                    <app-product-card [product]="product"></app-product-card>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row">
+                  <div *ngFor="let product of category.productos.slice(4,8)"
+                    class="col-sm-6 col-md-4 col-lg-3 card-container">
+                    <app-product-card [product]="product"></app-product-card>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="d-none d-md-block slide-button" type="button"
+            [attr.data-bs-target]="'#product-carousel-'+category.categoriaId" data-bs-slide="next">
+            <i class="bi-arrow-right-circle-fill" style="font-size: 1.8rem; color: grey;"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isLoadingProducts" class="loading-container d-flex">
+    <div class="spinner-grow" role="status">
+      <span class="sr-only"></span>
+    </div>
+    <div class="spinner-grow" role="status">
+      <span class="sr-only"></span>
+    </div>
+    <div class="spinner-grow" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+</div>

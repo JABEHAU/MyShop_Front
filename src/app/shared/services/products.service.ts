@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { BasicProduct } from '../models/basic-product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,13 @@ export class ProductsService {
     this.apiUrl = environment.apiUrl;
   }
 
-  getCategories(){
-    return this.httpClient.post<any>(`${this.apiUrl}/Products/Categories`, null);
+  getTopProductsByCategory(categoryId: number){
+    const body = {categoryId};
+    return this.httpClient.post<BasicProduct[]>(`${this.apiUrl}/Products/TopByCategory`, body);
+  }
+
+  getAllByCategory(categoryId: number){
+    const body = {categoryId};
+    return this.httpClient.post<BasicProduct[]>(`${this.apiUrl}/Products/GetAllByCategory`, body);
   }
 }

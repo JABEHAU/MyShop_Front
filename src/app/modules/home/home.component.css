@@ -1,0 +1,72 @@
+.home-component {
+    margin-top: 5vh;
+}
+
+.category-container {
+    background-color: #FFE03E;
+    align-items: center;
+    border: 1px solid black;
+    justify-content: space-between;
+    padding: 5px;
+    text-align: center;
+}
+
+.category-img {
+    width: 60%;
+}
+
+.offer-icon {
+    width: 20%;
+}
+
+.product-carousels-container {
+    width: 100% !important;
+    margin-bottom: 5%;
+}
+
+.card-container {
+    height: 50vh;
+    padding: 10px;
+}
+
+.slide-button {
+    border: transparent;
+    background-color: transparent;
+}
+
+.carousel-title {
+    margin-inline-start: 6% !important;
+
+}
+
+/*telefonos*/
+@media (max-width: 600px) {
+    .categories-container {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .category-container {
+        width: 30%;
+    }
+
+    .product-carousel {
+        width: 80% !important;
+    }
+}
+
+/*computadoras*/
+@media (min-width: 601px) {
+    .categories-container {
+        width: 70%;
+        justify-content: space-between;
+    }
+
+    .category-container {
+        width: 25%;
+    }
+
+    .product-carousel {
+        min-width: -webkit-fill-available !important;
+    }
+}

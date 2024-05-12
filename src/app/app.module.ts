@@ -7,6 +7,7 @@ import { CoreModule } from './core/core.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModuleModule } from './modules/module.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ModuleModule } from './modules/module.module';
     CoreModule,
     FormsModule,
     HttpClientModule,
-    ModuleModule
+    ModuleModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

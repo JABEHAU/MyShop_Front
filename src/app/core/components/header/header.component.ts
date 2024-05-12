@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
-import { ProductsService } from 'src/app/shared/services/products.service';
+import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,12 +17,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   protected isUserSeller: boolean = false;
 
   constructor(private localStorageService: LocalStorageService,
-    private productService: ProductsService,
+    private categoriesService: CategoriesService,
     private router: Router
   ) { }
 
   async ngOnInit() {
-    this.categories = await this.productService.getCategories().toPromise();
+    this.categories = await this.categoriesService.getCategories().toPromise();
     this.isUserLogin = this.localStorageService.isUserLoggedIn();
     this.storageSubscription = this.localStorageService.getStorageChangeObservable().subscribe(
       (isUserLoggedIn) => {

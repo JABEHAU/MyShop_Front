@@ -1,1 +1,19 @@
-<p>categories works!</p>
+<div class="categories container">
+    <div *ngIf="isLoadingProducts" class="loading-container d-flex">
+        <div class="spinner-grow" role="status">
+            <span class="sr-only"></span>
+        </div>
+        <div class="spinner-grow" role="status">
+            <span class="sr-only"></span>
+        </div>
+        <div class="spinner-grow" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoadingProducts" class="row">
+        <div class="col-sm-6 col-md-4 col-lg-3 card-container" *ngFor="let product of productsList">
+            <app-product-card [product]="product"></app-product-card>
+        </div>
+    </div>
+</div>

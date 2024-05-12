@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { user } from '../models/user.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +28,10 @@ export class LocalStorageService {
     return this.storageChange.asObservable();
   }
 
-  getUser(): user| null{
+  getUser(): User| null{
     let userAsJson = localStorage.getItem('user');
     if(userAsJson)
-      return JSON.parse(userAsJson) as user;
+      return JSON.parse(userAsJson) as User;
 
     return null
   }
