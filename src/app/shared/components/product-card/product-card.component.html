@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" (click)="redirectProduct(product.productoId)">
     <img [src]="product.fotoPrincipal" class="product-img">
     {{product.nombre}}
     <b *ngIf="product.esOferta==0">{{product.precio | currency}}</b>

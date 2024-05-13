@@ -11,22 +11,6 @@ import { Product } from 'src/app/shared/models/product.model';
 export class EditProductComponent implements OnInit {
 
   protected productId: number = 0;
-  protected product: Product = {
-    productoId: 1,
-    vendedorId: 7,
-    categoriaId: 1,
-    categoria: 'Electrónica, Audio y Video',
-    nombre: 'Audifonos',
-    descripcion: 'Audifonos xiaomi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia eius nobis obcaecati maxime ratione veniam accusamus vero nam at autem sit cum quo ex nulla, consequuntur impedit ducimus harum sequi.',
-    marca: 'Xiaomi',
-    modelo: 'M2236E1',
-    genero: 'N/A',
-    cantidad: 2,
-    precio: 380,
-    esOferta: 0,
-    precioOferta: 0,
-    fotos:['']
-  }
 
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router

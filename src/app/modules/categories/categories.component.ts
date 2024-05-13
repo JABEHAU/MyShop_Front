@@ -30,5 +30,4 @@ export class CategoriesComponent implements OnInit {
     this.productsList = await this.productService.getAllByCategory(this.categoryId).toPromise();
     this.isLoadingProducts = false;
   }
-
 }

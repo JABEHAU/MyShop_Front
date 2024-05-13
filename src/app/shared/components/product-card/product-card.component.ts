@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BasicProduct } from '../../models/basic-product.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -8,6 +9,9 @@ import { BasicProduct } from '../../models/basic-product.model';
 })
 export class ProductCardComponent {
   @Input() product: BasicProduct;
-  constructor() { }
+  constructor(private router: Router) { }
 
+  redirectProduct(productId: number){
+    this.router.navigate(['/product'], { queryParams: { id: productId} });
+  }
 }

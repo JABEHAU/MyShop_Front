@@ -1,8 +1,9 @@
+import { Photo } from "./photo.model";
+
 export interface Product{
     productoId: number,
     vendedorId: number,
     categoriaId: number,
-    categoria: string,
     nombre: string,
     descripcion: string,
     marca: string,
@@ -12,5 +13,6 @@ export interface Product{
     precio: number,
     esOferta: number,
     precioOferta: number,
-    fotos: string[]
+    fotos: Photo[],
+    comentarios: Comment[]
 }
