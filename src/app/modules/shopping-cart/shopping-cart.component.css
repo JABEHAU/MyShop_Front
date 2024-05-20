@@ -1,0 +1,30 @@
+.products-section{
+    width: 60%;
+}
+
+.general-information{
+    width: 40%;
+}
+.img{
+    width: 20%;
+}
+.product-name{
+    width: 60%;
+}
+.produt-amount{
+    width: 20%;
+}
+.card{
+    width: 80%;
+}
+i{
+    border: none !important
+}
+.btn-buy {
+    background-color: #FFF8B5;
+    border: 1px solid rgba(0, 0, 0, 0.21);
+}
+
+.btn-buy:hover {
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
+}

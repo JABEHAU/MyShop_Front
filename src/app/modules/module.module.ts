@@ -12,6 +12,8 @@ import { ManageProductsComponent } from './manage-products/manage-products.compo
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { SharedModule } from '../shared/shared.module';
 import { ProductComponent } from './product/product.component';
+import { BuyComponent } from './buy/buy.component';
+import { MyShoppingComponent } from './my-shopping/my-shopping.component';
 
 
 
@@ -26,7 +28,9 @@ import { ProductComponent } from './product/product.component';
     MyProfileComponent,
     ManageProductsComponent,
     EditProductComponent,
-    ProductComponent
+    ProductComponent,
+    BuyComponent,
+    MyShoppingComponent
   ],
   imports: [
     FormsModule,

@@ -1,0 +1,156 @@
+<div class="h3 mt-4 ms-5">Revisa y confirma tu compra</div>
+<div class="container mt-3 mb-4 d-flex flex-row">
+    <div class="d-flex flex-column justify-content-center" style="width: 60%;">
+        <div class="w-100">Detalle de envío</div>
+        <div class="location-card card d-flex flex-row justify-content-between my-3">
+            <div class="d-flex flex-row">
+                <i class="bi-geo-alt mx-4"
+                    style="height: 100%; font-size: 2rem;align-items: center; display: flex;"></i>
+                <div class="location-data d-flex flex-column">
+                    <div>CP {{user?.cp}}</div>
+                    <div>{{user?.ciudad}}, {{user?.estado}}, {{user?.pais}}.</div>
+                    <div *ngIf="user?.domicilio && user?.domicilio!=''">{{user?.domicilio}}</div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button class="btn" style="border: none!important;" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Editar</button>
+            </div>
+        </div>
+
+        <div class="product-card card">
+            <div class="card-header"><b>Productos</b></div>
+            <div class="card-body">
+                <div class="product d-flex justify-content-between align-items-center my-3" *ngFor="let item of items">
+                    <div style="width: 10%;">
+                        <img [src]="item.productDetail.fotoPrincipal" width="100%">
+                    </div>
+                    <div style="width: 50%;">
+                        {{item.productDetail.nombre}}
+                    </div>
+                    <div style="width: 20%;">
+                        <a *ngIf="item.productDetail.esOferta==0">{{item.productDetail.precio|currency}}</a>
+                        <a *ngIf="item.productDetail.esOferta==1">{{item.productDetail.precioOferta|currency}}</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-column align-items-end" style="width: 40%;">
+        <div class="card" style="width: 80%;">
+            <div class="card-header">
+                <b>Resumen de compra</b>
+            </div>
+            <div class="card-body">
+                <p class="d-flex flex-row justify-content-between">
+                    <a>Productos({{items.length}})</a>
+                    <a>{{totalShoppingCart|currency}}</a>
+                </p>
+                <p class="d-flex flex-row justify-content-between">
+                    <a>Envío</a>
+                    <a>{{sendCost|currency}}</a>
+                </p>
+                <p class="d-flex flex-row justify-content-between">
+                    <a>Total</a>
+                    <a>{{totalShoppingCart+sendCost|currency}}</a>
+                </p>
+            </div>
+            <div class="card-footer d-flex flex-column align-items-center">
+                <div *ngIf="user.domicilio==null || user.domicilio==''">
+                    <small class="text-danger">Faltan datos del domicilio de entrega.</small>
+                </div>
+                <button [disabled]="user.domicilio==null || user.domicilio==''" class="btn-buy btn"
+                    data-bs-toggle="modal" data-bs-target="#payModal">Confirmar compra</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--PopUp to set the pay data-->
+<div class="modal fade" id="payModal" tabindex="-1" aria-labelledby="payModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese los datos de su tarjeta</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="w-100 d-flex justify-content-center">
+                <div *ngIf="paySuccess" class="alert alert-success alert-dismissible fade show" style="width: 80%;"
+                    role="alert">
+                    Su pago se ha realizado exítosamente, gracias por su compra
+                </div>
+            </div>
+            <form (ngSubmit)="pay(formPop)" #formPop="ngForm">
+                <div class="modal-body">
+                    <label for="cardNumber" class="form-label">Número de Tarjeta</label>
+                    <input type="text" [(ngModel)]="cardNumber" pattern="^[0-9]{16}$" class="form-control"
+                        id="cardNumber" name="cardNumber" placeholder="xxxxxxxxxxxxxxxx" required>
+                    <div *ngIf="formPop.submitted && formPop.controls['cardNumber']?.errors">
+                        <small class="text-danger" *ngIf="formPop.controls['cardNumber']?.errors?.['required']">Número
+                            de tarjeta es requerido.</small>
+                        <small class="text-danger" *ngIf="formPop.controls['cardNumber']?.errors?.['pattern']">Número de
+                            tarjeta no válido.</small>
+                    </div>
+
+                    <label for="expirationDate" class="form-label">Fecha de Expiración</label>
+                    <input type="text" class="form-control" id="expirationDate" name="expirationDate"
+                        [(ngModel)]="expirationCard" pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$" placeholder="01/01"
+                        required>
+                    <div *ngIf="formPop.submitted && formPop.controls['expirationDate']?.errors">
+                        <small class="text-danger"
+                            *ngIf="formPop.controls['expirationDate']?.errors?.['required']">Fecha de expiración es
+                            requerida.</small>
+                        <small class="text-danger"
+                            *ngIf="formPop.controls['expirationDate']?.errors?.['pattern']">Formato de fecha no válido.
+                            Use MM/AA.</small>
+                    </div>
+
+                    <label for="cvv" class="form-label">CVV</label>
+                    <input type="text" class="form-control" id="cvv" name="cvv" [(ngModel)]="cvvCard"
+                        pattern="^[0-9]{3}$" placeholder="xxx" required>
+                    <div *ngIf="formPop.submitted && formPop.controls['cvv']?.errors">
+                        <small class="text-danger" *ngIf="formPop.controls['cvv']?.errors?.['required']">CVV es
+                            requerido.</small>
+                        <small class="text-danger" *ngIf="formPop.controls['cvv']?.errors?.['pattern']">CVV no válido.
+                            Debe ser de 3 dígitos.</small>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <!--button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button-->
+                    <button [disabled]="isLoadingButtonPay" type="submit" class="btn btn-pay">
+                        <a *ngIf="!isLoadingButtonPay">Confirmar</a>
+                        <span *ngIf="isLoadingButtonPay" class="spinner-border spinner-border-sm" role="status"
+                            aria-hidden="true"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- PopUP to set location -->
+<div *ngIf="paySuccess" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Domicilio de entrega</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <label for="inputEmailR" class="form-label">Nuevo domicilio</label>
+                    <input type="text" class="form-control" id="inputLocation" [(ngModel)]="user.domicilio"
+                        name="location" aria-describedby="locationHelp" required>
+                </div>
+                <div class="modal-footer">
+                    <!--button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button-->
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">
+                        Confirmar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

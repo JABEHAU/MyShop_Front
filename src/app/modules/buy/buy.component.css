@@ -1,0 +1,21 @@
+.btn-buy {
+    background-color: #FFF8B5;
+    border: 1px solid rgba(0, 0, 0, 0.21);
+}
+
+.btn-buy:hover {
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content{
+    background-color: #FFF8B5;
+}
+
+.modal-header, .modal-footer{
+    border: 0 !important;
+}
+
+.btn-pay{
+    background-color: #FFBD72;
+    border: 1px solid rgba(0, 0, 0, 0.21);
+}

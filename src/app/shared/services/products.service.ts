@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { BasicProduct } from '../models/basic-product.model';
 import { Product } from '../models/product.model';
+import { Sale } from '../models/sale.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,14 @@ export class ProductsService {
   getProduct(productId: number){
     const body = {productId}
     return this.httpClient.post<Product>(`${this.apiUrl}/Products/GetProduct`, body);
+  }
+
+  getBasicProduct(productId: number){
+    const body = {productId}
+    return this.httpClient.post<BasicProduct>(`${this.apiUrl}/Products/GetBasicProduct`, body);
+  }
+
+  insertSale(request: Sale){
+    return this.httpClient.post<boolean>(`${this.apiUrl}/Sales/Insert`, request);
   }
 }

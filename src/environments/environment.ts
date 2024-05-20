@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
    //apiUrl: 'https://myshopapi01.azurewebsites.net'
-   apiUrl: 'https://localhost:7029'
+   apiUrl: 'https://localhost:7029',
+   secretKey: 'MySuperSecretKey'
 };
 
 /*

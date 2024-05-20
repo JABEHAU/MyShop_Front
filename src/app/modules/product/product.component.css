@@ -1,0 +1,25 @@
+.img-comments-container, .main-information{
+    width: 50% !important;
+}
+
+.slide{
+    width: 60% !important;
+}
+
+.slide-button{
+    border:none !important;
+    background-color: transparent;
+}
+
+.btn{
+    background-color: #FFBD72;
+    border: 0.1px solid black;
+}
+
+.btn:hover {
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+
+.information-card{
+    width: 80%;
+}

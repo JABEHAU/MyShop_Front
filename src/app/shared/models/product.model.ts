@@ -1,4 +1,5 @@
 import { Photo } from "./photo.model";
+import { Comment } from "./comment.model";
 
 export interface Product{
     productoId: number,
