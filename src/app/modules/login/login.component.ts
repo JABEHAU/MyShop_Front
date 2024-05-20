@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/shared/services/users.service';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -26,8 +25,7 @@ export class LoginComponent {
 
   constructor(private router: Router,
     private usersSerivce: UsersService,
-    private localStorageService: LocalStorageService,
-    private location: Location
+    private localStorageService: LocalStorageService
   ) { }
 
   /**click button "confirmar" */
@@ -55,8 +53,7 @@ export class LoginComponent {
     this.incorrectCredential = false;
     //poner el usuario en el localStorage
     this.localStorageService.setUser(JSON.stringify(user));
-    //redirigír a la ruta anterior
-    this.location.back();
+    this.router.navigateByUrl('home');
   }
 
 
