@@ -1,1 +1,19 @@
-<p>search works!</p>
+<div class="container search my-3">
+    <div *ngIf="isLoadingProducts" class="loading-container d-flex">
+        <div class="spinner-grow" role="status">
+            <span class="sr-only"></span>
+        </div>
+        <div class="spinner-grow" role="status">
+            <span class="sr-only"></span>
+        </div>
+        <div class="spinner-grow" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoadingProducts" class="row">
+        <div [ngClass]="{'col-12 col-md-6 col-lg-4': products.length < 4, 'col-sm-6 col-md-4 col-lg-3 card-container': products.length >=4}"*ngFor="let product of products">
+            <app-product-card [product]="product"></app-product-card>
+        </div>
+    </div>
+</div>

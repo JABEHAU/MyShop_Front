@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   protected isUserLogin: boolean = false;
   private storageSubscription: Subscription | null = null;
   protected isUserSeller: boolean = false;
+  protected searchFilter: string = '';
 
   constructor(private localStorageService: LocalStorageService,
     private categoriesService: CategoriesService,
@@ -28,16 +29,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
       (isUserLoggedIn) => {
         this.isUserLogin = isUserLoggedIn;
         let user: any = this.localStorageService.getUser()
-        if(user){
+        if (user) {
           this.isUserSeller = user.esVendedor == 1;
-        }else{
+        } else {
           this.isUserSeller = false;
         }
       }
     );
   }
 
-  closeSession(){
+  search() {
+    let filter = this.searchFilter;
+    this.router.navigate(['/search'], { queryParams: { search: filter } });
+  }
+
+  onInputChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchFilter = inputElement.value;
+  }
+
+  closeSession() {
     this.localStorageService.removeUser();
     this.router.navigateByUrl('home');
   }

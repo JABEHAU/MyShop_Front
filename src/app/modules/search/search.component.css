@@ -1,0 +1,9 @@
+.search {
+    display: flex;
+    justify-content: center;
+}
+
+.card-container {
+    height: 50vh;
+    padding: 10px;
+}

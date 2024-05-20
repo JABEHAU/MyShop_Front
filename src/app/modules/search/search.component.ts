@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BasicProduct } from 'src/app/shared/models/basic-product.model';
+import { ProductsService } from 'src/app/shared/services/products.service';
 
 @Component({
   selector: 'app-search',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  protected filter: string = '';
+  protected products: BasicProduct[] = [];
+  protected isLoadingProducts: boolean = true;
+  constructor(private route: ActivatedRoute,
+    private productsService: ProductsService
+  ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.filter = params['search'];
+      this.loadData();
+    });
   }
 
+  async loadData() {
+    this.isLoadingProducts = true;
+    this.products = await this.productsService.searchByFilter(this.filter).toPromise();
+    this.isLoadingProducts = false;
+  }
 }

@@ -10,10 +10,12 @@ import { EditProductComponent } from './modules/edit-product/edit-product.compon
 import { ProductComponent } from './modules/product/product.component';
 import { BuyComponent } from './modules/buy/buy.component';
 import { MyShoppingComponent } from './modules/my-shopping/my-shopping.component';
+import { SearchComponent } from './modules/search/search.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'search', component: SearchComponent },
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'my-profile', component: MyProfileComponent },

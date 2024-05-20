@@ -1,1 +1,21 @@
-<p>my-shopping works!</p>
+<div class="container  mt-3 mb-4 d-flex flex-row">
+    <div class="d-flex flex-column justify-content-center" style="width: 80%;">
+        <div class="h3 mt-4 ms-5">Mis compras</div>
+        <div *ngFor="let sale of sales" class="card d-flex flex-row align-items-center my-3 p-2">
+            <div class="d-flex flex-column justify-content-center" style="width: 20%;">
+                <a>{{sale.fecha|date}}</a>
+                <a>Estado: {{sale.status}}</a>
+            </div>
+
+            <div class="d-flex flex-column" style="width: 60%;">
+                <a>CP: {{sale.cpEntrega}}</a>
+                <a>{{sale.ciudadEntrega}}, {{sale.estadoEntrega}}, {{sale.paisEntrega}}</a>
+                <a>{{sale.domicilioEntrega}}</a>
+            </div>
+
+            <div class="d-flex flex-column justify-content-center" style="width: 20%;">
+                <a>{{sale.total| currency}}</a>
+            </div>
+        </div>
+    </div>
+</div>

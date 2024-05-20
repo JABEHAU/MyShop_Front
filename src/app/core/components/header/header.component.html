@@ -11,8 +11,8 @@
             <div class="col-lg-9 searchAndButtonsContainer justify-content-start d-none d-lg-block">
                 <form class="d-flex searchForm" role="search">
                     <div class="input-group">
-                        <input class="form-control" type="search" placeholder="Buscar en My Shop" aria-label="Search" style="border-color: rgb(87, 85, 85);">
-                        <button class="btn btn-outline-success" type="submit" style="color: rgb(87, 85, 85); border-color: rgb(87, 85, 85);">
+                        <input class="form-control" (input)="onInputChange($event)" [value]="searchFilter" type="search" placeholder="Buscar en My Shop" aria-label="Search" style="border-color: rgb(87, 85, 85);">
+                        <button class="btn btn-outline-success" type="submit" (click)="search()" style="color: rgb(87, 85, 85); border-color: rgb(87, 85, 85);">
                             <i class="bi bi-search"></i>
                         </button>
                     </div>
